@@ -56,14 +56,14 @@ function edit($conn,$id) {
     if (!isset($category)) {
         echo "Категория не найдена";
     }
-    echo '<form action="index.php?catalog=category&action=update" method="post" enctype="multipart/form-data">
+    echo '<form action="index.php?catalog=category&action=update&id='.$id.'" method="post" >
             <input type="text" name="name" placeholder="имя товара переименуй" value="'.$category['name'].'"><br>
             <button type="submit">Редактировать категорию</button>
           </form>';
 }
 function update($conn, $id) {
-    $category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM categories WHERE id = $id"));
-    if ($category) { mysqli_query($conn, "UPDATE categories SET name= Э. $_POST['name'] WHERE id = $id"); }
+    $category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM categories WHERE id = '$id'"));
+    if ($category) { mysqli_query($conn, "UPDATE categories SET name='". $_POST['name'] . "' WHERE id = '$id' "); }
     echo "Информация обновлена";
     echo '<a href="index.php?catalog=category&action=index"></a>';
 }
